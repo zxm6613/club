@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zxm</groupId>
+    <artifactId>club-subjects</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>程序员社区</description>
+    <modules>
+        <module>club-subject-api</module>
+        <module>club-subject-application</module>
+        <module>club-subject-domain</module>
+        <module>club-subject-starter</module>
+        <module>club-subject-common</module>
+        <module>club-subject-infra</module>
+        <module>club-subject-application/club-subject-application-mq</module>
+        <module>club-subject-application/club-subject-application-job</module>
+        <module>club-subject-application/club-subject-application-controller</module>
+    </modules>
+
+
+</project>
