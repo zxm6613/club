@@ -17,8 +17,5 @@
         <module name="club-subject-infra" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="club-subject" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
