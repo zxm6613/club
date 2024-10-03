@@ -1,5 +1,7 @@
 package com.zxm.club.subject.application.controller;
 
+import com.zxm.club.subject.application.vo.SubjectCategoryVO;
+import com.zxm.club.subject.common.entity.Result;
 import com.zxm.club.subject.infra.basic.entity.SubjectCategory;
 import com.zxm.club.subject.infra.basic.service.SubjectCategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,4 +20,7 @@ public class SubjectController {
         SubjectCategory subjectCategory = subjectCategoryService.queryById(1L);
         return subjectCategory.getCategoryName();
     }
+
+
+
 }

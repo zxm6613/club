@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxm.club.subject.infra.basic.mapper.SubjectLabelDao">
+
+    <resultMap type="com.zxm.club.subject.infra.basic.entity.SubjectLabel" id="SubjectLabelMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="UPDATED_BY" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="labelName" column="label_name" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="labelSort" column="label_sort" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SubjectLabelMap">
+        select
+          id, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, label_name, category_id, label_sort
+        from subject_label
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SubjectLabelMap">
+        select
+          id, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, label_name, category_id, label_sort
+        from subject_label
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and CREATED_BY = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and CREATED_TIME = #{createdTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="updatedTime != null">
+                and UPDATED_TIME = #{updatedTime}
+            </if>
+            <if test="labelName != null and labelName != ''">
+                and label_name = #{labelName}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="labelSort != null">
+                and label_sort = #{labelSort}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from subject_label
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and CREATED_BY = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and CREATED_TIME = #{createdTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="updatedTime != null">
+                and UPDATED_TIME = #{updatedTime}
+            </if>
+            <if test="labelName != null and labelName != ''">
+                and label_name = #{labelName}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="labelSort != null">
+                and label_sort = #{labelSort}
+            </if>
+        </where>
+    </select>
+    <select id="queryByCategoryId" resultType="com.zxm.club.subject.infra.basic.entity.SubjectLabel">
+        select * from subject_label where category_id = #{categoryId}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into subject_label(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, label_name, category_id, label_sort)
+        values (#{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime}, #{labelName}, #{categoryId}, #{labelSort})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into subject_label(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, label_name, category_id, label_sort)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime}, #{entity.labelName}, #{entity.categoryId}, #{entity.labelSort})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into subject_label(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, label_name, category_id, label_sort)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime}, #{entity.labelName}, #{entity.categoryId}, #{entity.labelSort})
+        </foreach>
+        on duplicate key update
+        CREATED_BY = values(CREATED_BY),
+        CREATED_TIME = values(CREATED_TIME),
+        UPDATED_BY = values(UPDATED_BY),
+        UPDATED_TIME = values(UPDATED_TIME),
+        label_name = values(label_name),
+        category_id = values(category_id),
+        label_sort = values(label_sort)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update subject_label
+        <set>
+            <if test="createdBy != null and createdBy != ''">
+                CREATED_BY = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime},
+            </if>
+            <if test="labelName != null and labelName != ''">
+                label_name = #{labelName},
+            </if>
+            <if test="categoryId != null">
+                category_id = #{categoryId},
+            </if>
+            <if test="labelSort != null">
+                label_sort = #{labelSort},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from subject_label where id = #{id}
+    </delete>
+    <delete id="deleteByIds" parameterType="java.util.List">
+        DELETE FROM subject_label
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
+

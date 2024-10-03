@@ -6,6 +6,7 @@ import com.zxm.club.subject.infra.basic.service.SubjectCategoryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 刷题分类表(SubjectCategory)表服务实现类
@@ -49,9 +50,8 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
      * @return 实例对象
      */
     @Override
-    public SubjectCategory update(SubjectCategory subjectCategory) {
-        this.subjectCategoryDao.update(subjectCategory);
-        return this.queryById(subjectCategory.getId());
+    public int update(SubjectCategory subjectCategory) {
+        return this.subjectCategoryDao.update(subjectCategory);
     }
 
     /**
@@ -64,4 +64,37 @@ public class SubjectCategoryServiceImpl implements SubjectCategoryService {
     public boolean deleteById(Integer id) {
         return this.subjectCategoryDao.deleteById(id) > 0;
     }
+
+
+    /**
+     * 查询类别列表
+     *
+     * @return {@link List }<{@link SubjectCategory }>
+     */
+    @Override
+    public List<SubjectCategory> queryCategoryList() {
+        SubjectCategory subjectCategory = new SubjectCategory();
+        subjectCategory.setParentId(0);
+        return this.subjectCategoryDao.queryCategoryList(subjectCategory);
+    }
+
+    /**
+     * 查询类别
+     *
+     * @param subjectCategory 主题类别
+     * @return {@link List }<{@link SubjectCategory }>
+     */
+    @Override
+    public List<SubjectCategory> queryCategory(SubjectCategory subjectCategory) {
+        SubjectCategory category = new SubjectCategory();
+        category.setParentId(subjectCategory.getId().intValue());
+        return this.subjectCategoryDao.queryCategoryList(category);
+    }
+
+    @Override
+    public boolean deleteByIds(List<Long> ids) {
+        return subjectCategoryDao.deleteByIds(ids);
+    }
+
+
 }

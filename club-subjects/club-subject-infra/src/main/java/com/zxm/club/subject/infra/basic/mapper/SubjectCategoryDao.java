@@ -2,6 +2,8 @@ package com.zxm.club.subject.infra.basic.mapper;
 
 import com.zxm.club.subject.infra.basic.entity.SubjectCategory;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import java.util.List;
 
 /**
@@ -70,5 +72,13 @@ public interface SubjectCategoryDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 查询类别列表
+     *
+     * @return {@link List }<{@link SubjectCategory }>
+     */
+    List<SubjectCategory> queryCategoryList(SubjectCategory subjectCategory);
+
+    boolean deleteByIds(@Param("ids") List<Long> ids);
 }
 

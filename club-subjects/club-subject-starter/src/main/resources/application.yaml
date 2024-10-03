@@ -27,5 +27,10 @@ spring:
           enabled: true #启用 wall 过滤器。wall 过滤器的作用是防御 SQL 注入攻击，提供 SQL 执行的安全性检查。它通过一系列的规则来检查 SQL 语句是否存在潜在的危险操作，如删除表、修改表结构等。
         config:
           enabled: true
-
+logging:
+  config: classpath:log4j2-spring.xml
 publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJs6c/K9JqYEnZhhsUVwrKRzQFSI80VdfzVJqp0rOVXect6RNJobFmj90UffXjrCbPgg00GzFffunDNEme2p1xcCAwEAAQ==
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
