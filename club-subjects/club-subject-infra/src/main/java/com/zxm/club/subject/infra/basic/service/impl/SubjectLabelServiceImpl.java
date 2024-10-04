@@ -84,4 +84,15 @@ public class SubjectLabelServiceImpl implements SubjectLabelService {
             return this.subjectLabelDao.deleteByIds(ids);
         }
     }
+
+    /**
+     * 查询标签名称
+     *
+     * @param labelId 标签 ID
+     * @return {@link String }
+     */
+    @Override
+    public String queryLabelName(Integer labelId) {
+        return this.subjectLabelDao.queryLabelName(labelId);
+    }
 }

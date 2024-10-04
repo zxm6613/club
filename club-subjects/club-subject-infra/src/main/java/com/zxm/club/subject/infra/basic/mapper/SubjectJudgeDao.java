@@ -69,5 +69,20 @@ public interface SubjectJudgeDao {
      */
     int deleteById(Integer id);
 
+
+    /**
+     * 通过subjectId查询判断题详情
+     *
+     * @param id 身份证
+     * @return {@link SubjectJudge }
+     */
+    List<SubjectJudge> queryBySubjectId(Integer id);
+
+    /**
+     * 删除判断题
+     *
+     * @param id 身份证
+     */
+    void deleteBySubjectId(Integer id);
 }
 

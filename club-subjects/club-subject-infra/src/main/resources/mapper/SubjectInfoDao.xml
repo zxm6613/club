@@ -18,8 +18,17 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="SubjectInfoMap">
-        select
-          id, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name, settle_user, subject_score, subject_prase, subject_type
+        select id,
+               CREATED_BY,
+               CREATED_TIME,
+               UPDATED_BY,
+               UPDATED_TIME,
+               subject_difficult,
+               subject_name,
+               settle_user,
+               subject_score,
+               subject_prase,
+               subject_type
         from subject_info
         where id = #{id}
     </select>
@@ -27,7 +36,8 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="SubjectInfoMap">
         select
-          id, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name, settle_user, subject_score, subject_prase, subject_type
+        id, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name, settle_user,
+        subject_score, subject_prase, subject_type
         from subject_info
         <where>
             <if test="id != null">
@@ -107,26 +117,53 @@
             </if>
         </where>
     </select>
+    <select id="selectPage" resultMap="SubjectInfoMap">
+        select si.id,
+               si.CREATED_BY,
+               si.CREATED_TIME,
+               si.UPDATED_BY,
+               si.UPDATED_TIME,
+               si.subject_difficult,
+               si.subject_name,
+               si.settle_user,
+               si.subject_score,
+               si.subject_prase,
+               si.subject_type
+        from subject_info si,
+             subject_mapping sm
+        where si.id = sm.subject_id
+          and sm.category_id = #{categoryId}
+          and sm.label_id = #{labelId}
+          and si.subject_difficult = #{difficult}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into subject_info(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name, settle_user, subject_score, subject_prase, subject_type)
-        values (#{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime}, #{subjectDifficult}, #{subjectName}, #{settleUser}, #{subjectScore}, #{subjectPrase}, #{subjectType})
+        insert into subject_info(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name,
+                                 settle_user, subject_score, subject_prase, subject_type)
+        values (#{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime}, #{subjectDifficult}, #{subjectName},
+                #{settleUser}, #{subjectScore}, #{subjectPrase}, #{subjectType})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into subject_info(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name, settle_user, subject_score, subject_prase, subject_type)
+        insert into subject_info(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name,
+        settle_user, subject_score, subject_prase, subject_type)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime}, #{entity.subjectDifficult}, #{entity.subjectName}, #{entity.settleUser}, #{entity.subjectScore}, #{entity.subjectPrase}, #{entity.subjectType})
+            (#{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime},
+            #{entity.subjectDifficult}, #{entity.subjectName}, #{entity.settleUser}, #{entity.subjectScore},
+            #{entity.subjectPrase}, #{entity.subjectType})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into subject_info(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name, settle_user, subject_score, subject_prase, subject_type)
+        insert into subject_info(CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME, subject_difficult, subject_name,
+        settle_user, subject_score, subject_prase, subject_type)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime}, #{entity.subjectDifficult}, #{entity.subjectName}, #{entity.settleUser}, #{entity.subjectScore}, #{entity.subjectPrase}, #{entity.subjectType})
+            (#{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime},
+            #{entity.subjectDifficult}, #{entity.subjectName}, #{entity.settleUser}, #{entity.subjectScore},
+            #{entity.subjectPrase}, #{entity.subjectType})
         </foreach>
         on duplicate key update
         CREATED_BY = values(CREATED_BY),
@@ -181,7 +218,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from subject_info where id = #{id}
+        delete
+        from subject_info
+        where id = #{id}
     </delete>
 
 </mapper>

@@ -1,6 +1,9 @@
 package com.zxm.club.subject.infra.basic.service;
 
+import com.zxm.club.subject.infra.basic.entity.OptionList;
 import com.zxm.club.subject.infra.basic.entity.SubjectRedio;
+
+import java.util.List;
 
 /**
  * 单选题(SubjectRedio)表服务接口
@@ -42,4 +45,11 @@ public interface SubjectRedioService {
      */
     boolean deleteById(Integer id);
 
+    void deleteBySubjectId(Integer id);
+
+    List<OptionList> queryBySubjectId(Integer id);
+
+    String queryLabelName(Integer labelId);
+
+    List<SubjectRedio> selectBySubjectId(Integer id);
 }

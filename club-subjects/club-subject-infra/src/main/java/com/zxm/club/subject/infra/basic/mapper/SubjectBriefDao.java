@@ -70,5 +70,26 @@ public interface SubjectBriefDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 通过subjectId查询简答题详情
+     *
+     * @param id 身份证
+     * @return {@link SubjectBrief }
+     */
+    SubjectBrief queryBySubjectId(Integer id);
+
+    /**
+     * 修改简答题
+     *
+     * @param subjectBrief 主题简介
+     */
+    void updateBySubjectId(SubjectBrief subjectBrief);
+
+    /**
+     * 删除简答题
+     *
+     * @param id 身份证
+     */
+    void deleteBySubjectId(Integer id);
 }
 

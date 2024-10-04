@@ -93,6 +93,32 @@
             </if>
         </where>
     </select>
+    <select id="queryBySubjectId" resultMap="SubjectRedioMap">
+        select id,
+               CREATED_BY,
+               CREATED_TIME,
+               UPDATED_BY,
+               UPDATED_TIME,
+               subject_id,
+               option_type,
+               option_content,
+               is_correct
+        from subject_redio
+        where subject_id = #{id}
+    </select>
+    <select id="selectBySubjectId" resultMap="SubjectRedioMap">
+        select id,
+               CREATED_BY,
+               CREATED_TIME,
+               UPDATED_BY,
+               UPDATED_TIME,
+               subject_id,
+               option_type,
+               option_content,
+               is_correct
+        from subject_redio
+        where subject_id = #{id}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
@@ -160,6 +186,9 @@
     <!--通过主键删除-->
     <delete id="deleteById">
         delete from subject_redio where id = #{id}
+    </delete>
+    <delete id="deleteBySubjectId">
+        delete from subject_redio where subject_id = #{id}
     </delete>
 
 </mapper>

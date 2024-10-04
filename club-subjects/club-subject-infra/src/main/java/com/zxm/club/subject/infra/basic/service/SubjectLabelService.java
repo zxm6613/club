@@ -61,4 +61,6 @@ public interface SubjectLabelService {
      * @return boolean
      */
     boolean delete(List<Long> ids);
+
+    String queryLabelName(Integer labelId);
 }

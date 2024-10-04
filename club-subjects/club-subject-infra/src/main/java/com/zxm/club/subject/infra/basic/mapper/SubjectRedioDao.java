@@ -1,5 +1,6 @@
 package com.zxm.club.subject.infra.basic.mapper;
 
+import com.zxm.club.subject.infra.basic.entity.OptionList;
 import com.zxm.club.subject.infra.basic.entity.SubjectRedio;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -70,5 +71,10 @@ public interface SubjectRedioDao {
      */
     int deleteById(Integer id);
 
+    void deleteBySubjectId(Integer id);
+
+    List<OptionList> queryBySubjectId(Integer id);
+
+    List<SubjectRedio> selectBySubjectId(Integer id);
 }
 

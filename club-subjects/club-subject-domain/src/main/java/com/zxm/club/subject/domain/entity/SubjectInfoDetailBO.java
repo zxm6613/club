@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2024-10-03 15:08:56
  */
 @Data
-public class SubjectInfoBO implements Serializable {
+public class SubjectInfoDetailBO implements Serializable {
     private static final long serialVersionUID = 420568148031782050L;
     /**
      * 主键
@@ -42,6 +42,10 @@ public class SubjectInfoBO implements Serializable {
      * 题目答案
      */
     private String subjectAnswer;
+    /**
+     * 标签名称
+     */
+    private List<String> labelNames;
     /**
      * 分类id
      */

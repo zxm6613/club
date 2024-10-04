@@ -79,6 +79,17 @@
             </if>
         </where>
     </select>
+    <select id="queryBySubjectId" resultMap="SubjectBriefMap">
+        select id,
+               CREATED_BY,
+               CREATED_TIME,
+               UPDATED_BY,
+               UPDATED_TIME,
+               subject_id,
+               subject_answer
+        from subject_brief
+        where subject_id = #{id}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
@@ -134,10 +145,34 @@
         </set>
         where id = #{id}
     </update>
+    <update id="updateBySubjectId">
+        update subject_brief
+        <set>
+            <if test="createdBy != null and createdBy != ''">
+                CREATED_BY = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime},
+            </if>
+            <if test="subjectAnswer != null and subjectAnswer != ''">
+                subject_answer = #{subjectAnswer},
+            </if>
+        </set>
+        where subject_id = #{subjectId}
+    </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
         delete from subject_brief where id = #{id}
+    </delete>
+    <delete id="deleteBySubjectId">
+        delete from subject_brief where subject_id = #{id}
     </delete>
 
 </mapper>

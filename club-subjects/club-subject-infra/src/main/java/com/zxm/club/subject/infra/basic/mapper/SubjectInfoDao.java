@@ -1,7 +1,11 @@
 package com.zxm.club.subject.infra.basic.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zxm.club.subject.infra.basic.entity.SubjectInfo;
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -10,7 +14,7 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-03 15:08:56
  */
-public interface SubjectInfoDao {
+public interface SubjectInfoDao extends BaseMapper<SubjectInfo> {
 
     /**
      * 通过ID查询单条数据
@@ -69,6 +73,12 @@ public interface SubjectInfoDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
+
+    // 传递实体类作为参数进行分页查询
+    IPage<SubjectInfo> selectPage(Page<?> page,
+                                  @Param("labelId") Integer labelId,
+                                  @Param("categoryId") Integer categoryId,
+                                  @Param("difficult") Integer difficult);
 
 }
 

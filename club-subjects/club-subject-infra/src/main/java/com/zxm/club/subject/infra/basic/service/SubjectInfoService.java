@@ -1,6 +1,10 @@
 package com.zxm.club.subject.infra.basic.service;
 
+import com.zxm.club.subject.common.entity.ResultPage;
 import com.zxm.club.subject.infra.basic.entity.SubjectInfo;
+import com.zxm.club.subject.infra.basic.entity.SubjectInfoPage;
+
+import java.util.List;
 
 /**
  * 题目信息表(SubjectInfo)表服务接口
@@ -43,4 +47,11 @@ public interface SubjectInfoService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 分页查询
+     *
+     * @param subjectInfoPage 主题信息页面
+     * @return {@link List }<{@link SubjectInfo }>
+     */
+    ResultPage<List<SubjectInfo>> pageQuery(SubjectInfoPage subjectInfoPage);
 }

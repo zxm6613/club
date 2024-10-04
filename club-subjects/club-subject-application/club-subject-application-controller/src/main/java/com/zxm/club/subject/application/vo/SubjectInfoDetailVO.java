@@ -1,5 +1,6 @@
-package com.zxm.club.subject.domain.entity;
+package com.zxm.club.subject.application.vo;
 
+import com.zxm.club.subject.application.dto.OptionListDTO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2024-10-03 15:08:56
  */
 @Data
-public class SubjectInfoBO implements Serializable {
+public class SubjectInfoDetailVO implements Serializable {
     private static final long serialVersionUID = 420568148031782050L;
     /**
      * 主键
@@ -43,6 +44,10 @@ public class SubjectInfoBO implements Serializable {
      */
     private String subjectAnswer;
     /**
+     * 标签名称
+     */
+    private List<String> labelNames;
+    /**
      * 分类id
      */
     private List<Integer> categoryId;
@@ -53,7 +58,7 @@ public class SubjectInfoBO implements Serializable {
     /**
      * 选项列表
      */
-    private List<OptionListBO> optionListBOS;
+    private List<OptionListVO> optionListVOS;
 
 }
 

@@ -14,6 +14,7 @@ public interface SubjectInfoConverter {
     SubjectInfoConverter INSTANCE = Mappers.getMapper(SubjectInfoConverter.class);
     //对象类型转换，返回值是要转的对象，参数是用什么值转
     SubjectInfo convertBoToLabel(SubjectInfoBO subjectInfoBO);
+    List<SubjectInfoBO> convertInfoToBo(List<SubjectInfo> subjectInfoList);
 
 
 }

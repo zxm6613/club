@@ -1,11 +1,14 @@
 package com.zxm.club.subject.infra.basic.service.impl;
 
+import com.zxm.club.subject.infra.basic.entity.OptionList;
 import com.zxm.club.subject.infra.basic.entity.SubjectRedio;
 import com.zxm.club.subject.infra.basic.mapper.SubjectRedioDao;
+import com.zxm.club.subject.infra.basic.service.SubjectLabelService;
 import com.zxm.club.subject.infra.basic.service.SubjectRedioService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 单选题(SubjectRedio)表服务实现类
@@ -17,6 +20,8 @@ import javax.annotation.Resource;
 public class SubjectRedioServiceImpl implements SubjectRedioService {
     @Resource
     private SubjectRedioDao subjectRedioDao;
+    @Resource
+    private SubjectLabelService subjectLabelService;
 
     /**
      * 通过ID查询单条数据
@@ -62,5 +67,25 @@ public class SubjectRedioServiceImpl implements SubjectRedioService {
     @Override
     public boolean deleteById(Integer id) {
         return this.subjectRedioDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public void deleteBySubjectId(Integer id) {
+        this.subjectRedioDao.deleteBySubjectId(id);
+    }
+
+    @Override
+    public List<OptionList> queryBySubjectId(Integer id) {
+        return this.subjectRedioDao.queryBySubjectId(id);
+    }
+
+    @Override
+    public String queryLabelName(Integer labelId) {
+        return this.subjectLabelService.queryLabelName(labelId);
+    }
+
+    @Override
+    public List<SubjectRedio> selectBySubjectId(Integer id) {
+        return this.subjectRedioDao.selectBySubjectId(id);
     }
 }

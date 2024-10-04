@@ -43,4 +43,33 @@ public interface SubjectBriefService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 查询标签名称
+     *
+     * @param labelId 标签 ID
+     * @return {@link String }
+     */
+    String queryLabelName(Integer labelId);
+
+    /**
+     * 通过subjectId查询简答题详情
+     *
+     * @param id 身份证
+     * @return {@link SubjectBrief }
+     */
+    SubjectBrief queryBySubjectId(Integer id);
+
+    /**
+     * 修改简答题
+     *
+     * @param subjectBrief 主题简介
+     */
+    void updateBySubjectId(SubjectBrief subjectBrief);
+
+    /**
+     * 删除简答题
+     *
+     * @param id 身份证
+     */
+    void deleteBySubjectId(Integer id);
 }

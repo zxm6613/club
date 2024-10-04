@@ -1,6 +1,9 @@
 package com.zxm.club.subject.infra.basic.service;
 
+import com.zxm.club.subject.infra.basic.entity.OptionList;
 import com.zxm.club.subject.infra.basic.entity.SubjectMultiple;
+
+import java.util.List;
 
 /**
  * 多选题(SubjectMultiple)表服务接口
@@ -42,4 +45,42 @@ public interface SubjectMultipleService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 查询标签名称
+     *
+     * @param labelId 标签 ID
+     * @return {@link String }
+     */
+    String queryLabelName(Integer labelId);
+
+    /**
+     * 查询选项列表
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link OptionList }>
+     */
+    List<OptionList> queryBySubjectId(Integer id);
+
+    /**
+     * 根据subjectId查询选择题详情
+     *
+     * @param id 身份证
+     * @return {@link SubjectMultiple }
+     */
+    SubjectMultiple querySubjectId(Integer id);
+
+    /**
+     * 查多选题实体列表
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link SubjectMultiple }>
+     */
+    List<SubjectMultiple> selectBySubjectId(Integer id);
+
+    /**
+     * 删除选择题
+     *
+     * @param id 身份证
+     */
+    void deleteBySubjectId(Integer id);
 }

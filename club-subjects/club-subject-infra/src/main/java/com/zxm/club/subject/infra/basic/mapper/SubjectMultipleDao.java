@@ -1,5 +1,6 @@
 package com.zxm.club.subject.infra.basic.mapper;
 
+import com.zxm.club.subject.infra.basic.entity.OptionList;
 import com.zxm.club.subject.infra.basic.entity.SubjectMultiple;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -69,5 +70,35 @@ public interface SubjectMultipleDao {
      */
     int deleteById(Integer id);
 
+    /**
+     * 查询选项列表
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link OptionList }>
+     */
+    List<OptionList> queryBySubjectId(Integer id);
+
+    /**
+     * 根据subjectId查询选择题详情
+     *
+     * @param id 身份证
+     * @return {@link SubjectMultiple }
+     */
+    SubjectMultiple querySubjectId(Integer id);
+
+    /**
+     * 查多选题实体列表
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link SubjectMultiple }>
+     */
+    List<SubjectMultiple> selectBySubjectId(Integer id);
+
+    /**
+     * 删除选择题
+     *
+     * @param id 身份证
+     */
+    void deleteBySubjectId(Integer id);
 }
 

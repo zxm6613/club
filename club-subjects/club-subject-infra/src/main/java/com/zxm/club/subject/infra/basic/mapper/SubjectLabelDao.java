@@ -87,5 +87,13 @@ public interface SubjectLabelDao {
      * @return boolean
      */
     boolean deleteByIds(@Param("ids") List<Long> ids);
+
+    /**
+     * 查询标签名称
+     *
+     * @param labelId 标签 ID
+     * @return {@link String }
+     */
+    String queryLabelName(Integer labelId);
 }
 

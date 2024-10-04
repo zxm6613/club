@@ -57,5 +57,18 @@ public interface SubjectMappingService {
     void insertBatch(Integer id, List<Integer> categoryIds, List<Integer> labelIds);
 
 
+    /**
+     * 通过题目id查询标签id
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link Integer }>
+     */
+    List<Integer> queryBySubjectId(Integer id);
 
+    /**
+     * 通过题目id删除关系表数据
+     *
+     * @param id 身份证
+     */
+    void deleteBySubjectId(Integer id);
 }

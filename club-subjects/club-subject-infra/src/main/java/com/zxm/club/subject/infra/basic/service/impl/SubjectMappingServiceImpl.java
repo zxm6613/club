@@ -90,6 +90,26 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
         subjectMappingDao.insertBatch(subjectMappingList);
     }
 
+    /**
+     * 通过题目id查询标签id
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link Integer }>
+     */
+    @Override
+    public List<Integer> queryBySubjectId(Integer id) {
+        return this.subjectMappingDao.queryBySubjectId(id);
+    }
+
+    /**
+     * 通过题目id删除关系表数据
+     *
+     * @param id 身份证
+     */
+    @Override
+    public void deleteBySubjectId(Integer id) {
+        this.subjectMappingDao.deleteBySubjectId(id);
+    }
 
 
 }
