@@ -37,3 +37,4 @@ mybatis-plus:
       id-type: auto  # 全局主键自增策略
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
