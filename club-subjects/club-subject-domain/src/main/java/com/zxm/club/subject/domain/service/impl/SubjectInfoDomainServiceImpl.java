@@ -12,6 +12,7 @@ import com.zxm.club.subject.domain.service.SubjectInfoDomainService;
 import com.zxm.club.subject.infra.basic.entity.SubjectInfo;
 import com.zxm.club.subject.infra.basic.entity.SubjectInfoPage;
 import com.zxm.club.subject.infra.basic.service.SubjectInfoService;
+import com.zxm.club.subject.infra.basic.service.SubjectLabelService;
 import com.zxm.club.subject.infra.basic.service.SubjectMappingService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +34,8 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
     private SubjectTypeFactory subjectTypeFactory;
     @Resource
     private SubjectMappingService subjectMappingService;
+    @Resource
+    private SubjectLabelService subjectLabelService;
 
     /**
      * 新增题目
@@ -50,6 +53,11 @@ public class SubjectInfoDomainServiceImpl implements SubjectInfoDomainService {
                 .getSubjectTypeStrategy(subjectInfoBO.getSubjectType());
         subjectInfoBO.setId(subjectInfo.getId());
         subjectTypeStrategy.add(subjectInfoBO);
+        //新增标签，如果标签已经存在则不新增
+//        List<Integer> labelIds = subjectInfoBO.getLabelId();
+//        labelIds.forEach(labelId -> {
+//            subjectLabelService.insert(labelId);
+//        });
         //插入题目分类标签关系表
         subjectMappingService.insertBatch(subjectInfoBO.getId(),
                 subjectInfoBO.getCategoryId(), subjectInfoBO.getLabelId());

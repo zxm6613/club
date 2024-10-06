@@ -16,7 +16,9 @@
         <module name="club-subject-application-controller" />
         <module name="club-subject-domain" />
         <module name="club-subject-infra" />
+        <module name="club-oss" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
 </project>

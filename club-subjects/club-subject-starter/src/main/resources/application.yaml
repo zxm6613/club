@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 4000
 spring:
   datasource:
     url: jdbc:mysql://192.168.203.130:3306/subject?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&useSSL=true

@@ -1,0 +1,21 @@
+server:
+  port: 4001
+
+minio:
+  url: http://192.168.203.130:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+#oss:
+#  storyType: minio
+#nacos:
+#  config:
+#    access-key: nacos
+#    secret-key: nacos
+#    server-addr: http://192.168.203.130:8848
+#    bootstrap:
+#      enable: true
+#    data-id: club-oss.yaml
+#    group: DEFAULT_GROUP
+#    type: yaml
+#    auto-refresh: true
+#    remote-first: true
