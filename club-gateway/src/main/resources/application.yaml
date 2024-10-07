@@ -10,3 +10,33 @@ spring:
             - Path=/oss/** #只会匹配以oss开头的路径
 #          filters:
 #            - StripPrefix=1 #去掉请求第一个前缀，即club
+        - id: club-auth #路由的唯一标识,就是路由名字
+          uri: lb://club-auth #定义了请求将被转发的目标地址，基于nacos来找这个服务名为club-oss的服务
+          predicates:
+            - Path=/auth/** #只会匹配以auth开头的路径
+        - id: club-subject #路由的唯一标识,就是路由名字
+          uri: lb://club-subject #定义了请求将被转发的目标地址，基于nacos来找这个服务名为club-oss的服务
+          predicates:
+            - Path=/subject/** #只会匹配以oss开头的路径
+  # redis配置
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 1
+    # Redis服务器地址
+    host: 192.168.203.130
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 连接超时时间
+    timeout: 2s
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0

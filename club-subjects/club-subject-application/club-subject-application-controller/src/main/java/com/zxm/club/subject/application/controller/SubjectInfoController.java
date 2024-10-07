@@ -57,6 +57,7 @@ public class SubjectInfoController {
                 log.info("SubjectInfoController.add.dto:{}",
                         JSON.toJSONString(subjectInfoDTO));
             }
+            int i = 1/0;
 
             //健壮性判断
             Preconditions.checkArgument(StrUtil.isNotBlank(subjectInfoDTO.getSubjectName())

@@ -29,6 +29,28 @@ spring:
           enabled: true #启用 wall 过滤器。wall 过滤器的作用是防御 SQL 注入攻击，提供 SQL 执行的安全性检查。它通过一系列的规则来检查 SQL 语句是否存在潜在的危险操作，如删除表、修改表结构等。
         config:
           enabled: true
+  # redis配置
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 1
+    # Redis服务器地址
+    host: 192.168.203.130
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 连接超时时间
+    timeout: 2s
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
 publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJs6c/K9JqYEnZhhsUVwrKRzQFSI80VdfzVJqp0rOVXect6RNJobFmj90UffXjrCbPgg00GzFffunDNEme2p1xcCAwEAAQ==
 
 #日志配置
@@ -57,6 +79,6 @@ sa-token:
   # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
   is-share: true
   # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
-  token-style: uuid
+  token-style: random-32
   # 是否输出操作日志
   is-log: true
