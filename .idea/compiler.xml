@@ -8,17 +8,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="club-subject-starter" />
-        <module name="club-subject-api" />
         <module name="club-subject-application-mq" />
         <module name="club-subject-common" />
         <module name="club-subject-application" />
         <module name="club-subject-application-job" />
-        <module name="club-subject-application-controller" />
+        <module name="club-auth-domain" />
+        <module name="club-auth-application-controller" />
         <module name="club-subject-domain" />
-        <module name="club-subject-infra" />
+        <module name="club-auth-application-job" />
+        <module name="club-gateway" />
         <module name="club-oss" />
+        <module name="club-auth-infra" />
+        <module name="club-subject-api" />
+        <module name="club-subject-application-controller" />
+        <module name="club-auth-api" />
+        <module name="club-auth-starter" />
+        <module name="club-auth-application-mq" />
+        <module name="club-auth-common" />
+        <module name="club-subject-infra" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="club-permission" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

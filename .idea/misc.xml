@@ -7,7 +7,15 @@
         <option value="$PROJECT_DIR$/club-subject/pom.xml" />
         <option value="$PROJECT_DIR$/club-subjects/pom.xml" />
         <option value="$PROJECT_DIR$/club-oss/pom.xml" />
+        <option value="$PROJECT_DIR$/club-permission/pom.xml" />
+        <option value="$PROJECT_DIR$/club-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/club-gateway/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/club-permission/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxm.club.auth.infra.basic.mapper.AuthPermissionDao">
+
+    <resultMap type="com.zxm.club.auth.infra.basic.entity.AuthPermission" id="AuthPermissionMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="menuUrl" column="menu_url" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="show" column="show" jdbcType="INTEGER"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="permissionKey" column="permission_key" jdbcType="VARCHAR"/>
+        <result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="UPDATED_BY" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AuthPermissionMap">
+        select
+          id, name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+        from auth_permission
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+<!--    <select id="queryAllByLimit" resultMap="AuthPermissionMap">-->
+<!--        select-->
+<!--          id, name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME-->
+<!--        from auth_permission-->
+<!--        <where>-->
+<!--            <if test="id != null">-->
+<!--                and id = #{id}-->
+<!--            </if>-->
+<!--            <if test="name != null and name != ''">-->
+<!--                and name = #{name}-->
+<!--            </if>-->
+<!--            <if test="parentId != null">-->
+<!--                and parent_id = #{parentId}-->
+<!--            </if>-->
+<!--            <if test="type != null">-->
+<!--                and type = #{type}-->
+<!--            </if>-->
+<!--            <if test="menuUrl != null and menuUrl != ''">-->
+<!--                and menu_url = #{menuUrl}-->
+<!--            </if>-->
+<!--            <if test="status != null">-->
+<!--                and status = #{status}-->
+<!--            </if>-->
+<!--            <if test="show != null">-->
+<!--                and show = #{show}-->
+<!--            </if>-->
+<!--            <if test="icon != null and icon != ''">-->
+<!--                and icon = #{icon}-->
+<!--            </if>-->
+<!--            <if test="permissionKey != null and permissionKey != ''">-->
+<!--                and permission_key = #{permissionKey}-->
+<!--            </if>-->
+<!--            <if test="createdBy != null and createdBy != ''">-->
+<!--                and CREATED_BY = #{createdBy}-->
+<!--            </if>-->
+<!--            <if test="createdTime != null">-->
+<!--                and CREATED_TIME = #{createdTime}-->
+<!--            </if>-->
+<!--            <if test="updatedBy != null and updatedBy != ''">-->
+<!--                and UPDATED_BY = #{updatedBy}-->
+<!--            </if>-->
+<!--            <if test="updatedTime != null">-->
+<!--                and UPDATED_TIME = #{updatedTime}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        limit #{pageable.offset}, #{pageable.pageSize}-->
+<!--    </select>-->
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from auth_permission
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="menuUrl != null and menuUrl != ''">
+                and menu_url = #{menuUrl}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="show != null">
+                and show = #{show}
+            </if>
+            <if test="icon != null and icon != ''">
+                and icon = #{icon}
+            </if>
+            <if test="permissionKey != null and permissionKey != ''">
+                and permission_key = #{permissionKey}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and CREATED_BY = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and CREATED_TIME = #{createdTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="updatedTime != null">
+                and UPDATED_TIME = #{updatedTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_permission(name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        values (#{name}, #{parentId}, #{type}, #{menuUrl}, #{status}, #{show}, #{icon}, #{permissionKey}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_permission(name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.name}, #{entity.parentId}, #{entity.type}, #{entity.menuUrl}, #{entity.status}, #{entity.show}, #{entity.icon}, #{entity.permissionKey}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_permission(name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.name}, #{entity.parentId}, #{entity.type}, #{entity.menuUrl}, #{entity.status}, #{entity.show}, #{entity.icon}, #{entity.permissionKey}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime})
+        </foreach>
+        on duplicate key update
+        name = values(name),
+        parent_id = values(parent_id),
+        type = values(type),
+        menu_url = values(menu_url),
+        status = values(status),
+        show = values(show),
+        icon = values(icon),
+        permission_key = values(permission_key),
+        CREATED_BY = values(CREATED_BY),
+        CREATED_TIME = values(CREATED_TIME),
+        UPDATED_BY = values(UPDATED_BY),
+        UPDATED_TIME = values(UPDATED_TIME)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update auth_permission
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="menuUrl != null and menuUrl != ''">
+                menu_url = #{menuUrl},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="show != null">
+                show = #{show},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="permissionKey != null and permissionKey != ''">
+                permission_key = #{permissionKey},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                CREATED_BY = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from auth_permission where id = #{id}
+    </delete>
+
+</mapper>
+

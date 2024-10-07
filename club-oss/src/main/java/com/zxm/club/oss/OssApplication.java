@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan("com.zxm")
 public class OssApplication {
-    // TODO: 数据库表设计中的题目标签分类三者的关系设计巧妙，很值得思考
     public static void main(String[] args) {
         SpringApplication.run(OssApplication.class);
     }

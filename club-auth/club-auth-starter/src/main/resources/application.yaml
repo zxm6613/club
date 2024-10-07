@@ -1,0 +1,62 @@
+server:
+  port: 4002
+
+#数据库配置
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.203.130:3306/permission?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&useSSL=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: f/ryTeSMMTM7cANAKvSr6s94GApI/whKIvJLhfe/iUrjTsSlQVq5WpAkx+qvd7u5c9e/U91olleEgYOUinmh/g==
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      connection-properties: config.decrypt=true;config.decrypt.key=${publicKey};
+      initial-size: 20 #连接池初始化时创建的连接数，也就是一开始就创建的数据库连接数量。当应用启动时，Druid 会创建 20 个连接。
+      min-idle: 20 #连接池中保持的最小空闲连接数，即当空闲连接数少于 20 时，Druid 会创建新的连接以满足最小空闲连接数的要求。
+      max-active: 100 #连接池中允许的最大活动连接数，即最多可以同时处理 100 个连接请求。如果活动连接数达到 100，则新的连接请求会被放入等待队列。
+      max-wait: 60000 #当连接池中的连接用完时，新的连接请求最长等待的时间（以毫秒为单位）。如果在 60000 毫秒（1 分钟）内没有可用连接，连接请求将会超时并抛出异常。
+      stat-view-servlet:
+        enabled: true #启用 Druid 监控页面。
+        url-pattern: /druid/* #访问 Druid 监控页面的 URL 路径。这里配置为 /druid/*，表示通过 /druid 路径可以访问监控页面，例如 http://localhost:8080/druid。
+        login-username: admin #访问 Druid 监控页面时需要输入的用户名。
+        login-password: 123456 #密码
+      filter:
+        stat:
+          enabled: true #启用 stat 过滤器。这个过滤器用于统计 SQL 执行情况，包括执行时间、执行次数、慢 SQL 等。
+          slow-sql-millis: 2000 #将 SQL 执行超过 2000 毫秒（即 2 秒）的 SQL 语句视为慢 SQL。
+          log-slow-sql: true #当出现慢 SQL 时，将其记录到日志中，方便分析慢 SQL。
+        wall:
+          enabled: true #启用 wall 过滤器。wall 过滤器的作用是防御 SQL 注入攻击，提供 SQL 执行的安全性检查。它通过一系列的规则来检查 SQL 语句是否存在潜在的危险操作，如删除表、修改表结构等。
+        config:
+          enabled: true
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJs6c/K9JqYEnZhhsUVwrKRzQFSI80VdfzVJqp0rOVXect6RNJobFmj90UffXjrCbPgg00GzFffunDNEme2p1xcCAwEAAQ==
+
+#日志配置
+logging:
+  config: classpath:log4j2-spring.xml
+
+#mybatis-plus配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto  # 全局主键自增策略
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#satoken配置
+sa-token:
+  # token 名称（同时也是 cookie 名称）
+  token-name: satoken
+  # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+  timeout: 2592000
+  # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
+  active-timeout: -1
+  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  is-share: true
+  # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: true

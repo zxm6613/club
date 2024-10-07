@@ -1,0 +1,12 @@
+server:
+  port: 4003
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: club-oss #路由的唯一标识,就是路由名字
+          uri: lb://club-oss #定义了请求将被转发的目标地址，基于nacos来找这个服务名为club-oss的服务
+          predicates:
+            - Path=/oss/** #只会匹配以oss开头的路径
+#          filters:
+#            - StripPrefix=1 #去掉请求第一个前缀，即club

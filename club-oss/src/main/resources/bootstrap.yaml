@@ -11,3 +11,6 @@ spring:
         prefix: ${spring.application.name}
         file-extension: yaml
         namespace:
+      discovery:
+        enabled: true
+        server-addr: 192.168.203.130:8848

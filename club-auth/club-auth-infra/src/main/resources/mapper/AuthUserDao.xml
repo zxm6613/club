@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxm.club.auth.infra.basic.mapper.AuthUserDao">
+
+    <resultMap type="com.zxm.club.auth.infra.basic.entity.AuthUser" id="AuthUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="INTEGER"/>
+        <result property="extJson" column="ext_json" jdbcType="VARCHAR"/>
+        <result property="createdBy" column="CREATED_BY" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="CREATED_TIME" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="UPDATED_BY" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="UPDATED_TIME" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="AuthUserMap">
+        select
+          id, username, password, nickname, sex, introduce, avatar, status, email, phone, is_delete, ext_json, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+        from auth_user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="AuthUserMap">
+        select
+          id, username, password, nickname, sex, introduce, avatar, status, email, phone, is_delete, ext_json, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+        from auth_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="extJson != null and extJson != ''">
+                and ext_json = #{extJson}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and CREATED_BY = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and CREATED_TIME = #{createdTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="updatedTime != null">
+                and UPDATED_TIME = #{updatedTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from auth_user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="sex != null">
+                and sex = #{sex}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="avatar != null and avatar != ''">
+                and avatar = #{avatar}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="extJson != null and extJson != ''">
+                and ext_json = #{extJson}
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                and CREATED_BY = #{createdBy}
+            </if>
+            <if test="createdTime != null">
+                and CREATED_TIME = #{createdTime}
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                and UPDATED_BY = #{updatedBy}
+            </if>
+            <if test="updatedTime != null">
+                and UPDATED_TIME = #{updatedTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_user(username, password, nickname, sex, introduce, avatar, status, email, phone, is_delete, ext_json, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        values (#{username}, #{password}, #{nickname}, #{sex}, #{introduce}, #{avatar}, #{status}, #{email}, #{phone}, #{isDelete}, #{extJson}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_user(username, password, nickname, sex, introduce, avatar, status, email, phone, is_delete, ext_json, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.username}, #{entity.password}, #{entity.nickname}, #{entity.sex}, #{entity.introduce}, #{entity.avatar}, #{entity.status}, #{entity.email}, #{entity.phone}, #{entity.isDelete}, #{entity.extJson}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into auth_user(username, password, nickname, sex, introduce, avatar, status, email, phone, is_delete, ext_json, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.username}, #{entity.password}, #{entity.nickname}, #{entity.sex}, #{entity.introduce}, #{entity.avatar}, #{entity.status}, #{entity.email}, #{entity.phone}, #{entity.isDelete}, #{entity.extJson}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime})
+        </foreach>
+        on duplicate key update
+        username = values(username),
+        password = values(password),
+        nickname = values(nickname),
+        sex = values(sex),
+        introduce = values(introduce),
+        avatar = values(avatar),
+        status = values(status),
+        email = values(email),
+        phone = values(phone),
+        is_delete = values(is_delete),
+        ext_json = values(ext_json),
+        CREATED_BY = values(CREATED_BY),
+        CREATED_TIME = values(CREATED_TIME),
+        UPDATED_BY = values(UPDATED_BY),
+        UPDATED_TIME = values(UPDATED_TIME)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update auth_user
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="introduce != null and introduce != ''">
+                introduce = #{introduce},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="extJson != null and extJson != ''">
+                ext_json = #{extJson},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                CREATED_BY = #{createdBy},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                UPDATED_BY = #{updatedBy},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from auth_user where id = #{id}
+    </delete>
+
+</mapper>
+

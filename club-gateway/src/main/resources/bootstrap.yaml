@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: club-gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.203.130:8848
+        group: DEFAULT_GROUP
+        prefix: ${spring.application.name}
+        file-extension: yaml
+        namespace:
+      discovery:
+        enabled: true
+        server-addr: 192.168.203.130:8848

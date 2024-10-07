@@ -31,6 +31,8 @@ public class MinioUtil {
         if (!exist) {
             minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
         }
+        ObjectWriteResponse objectWriteResponse = minioClient.uploadObject(UploadObjectArgs.builder().build());
+
     }
 
     /**
