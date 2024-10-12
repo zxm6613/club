@@ -1,5 +1,6 @@
 package com.zxm.club.auth.infra.basic.entity;
 
+import cn.hutool.core.util.RandomUtil;
 import lombok.Data;
 
 import java.util.Date;
@@ -27,9 +28,9 @@ public class AuthUser implements Serializable {
      */
     private String password;
     /**
-     * 昵称
+     * 昵称,不传就给一个默认值
      */
-    private String nickname;
+    private String nickname = RandomUtil.randomString(10);
     /**
      * 性别
      */
@@ -37,7 +38,7 @@ public class AuthUser implements Serializable {
     /**
      * 个人介绍
      */
-    private String introduce;
+    private String introduce = "这个人很懒，什么都没有写";
     /**
      * 头像
      */
@@ -45,7 +46,7 @@ public class AuthUser implements Serializable {
     /**
      * 状态
      */
-    private Integer status;
+    private Integer status = 0;
     /**
      * 邮箱
      */
@@ -57,7 +58,7 @@ public class AuthUser implements Serializable {
     /**
      * 是否逻辑删除
      */
-    private Integer isDelete;
+    private Integer isDelete = 0;
     /**
      * 特殊字段
      */

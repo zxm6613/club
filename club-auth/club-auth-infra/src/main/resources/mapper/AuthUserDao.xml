@@ -29,63 +29,7 @@
         where id = #{id}
     </select>
 
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="AuthUserMap">
-        select
-          id, username, password, nickname, sex, introduce, avatar, status, email, phone, is_delete, ext_json, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
-        from auth_user
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-            <if test="nickname != null and nickname != ''">
-                and nickname = #{nickname}
-            </if>
-            <if test="sex != null">
-                and sex = #{sex}
-            </if>
-            <if test="introduce != null and introduce != ''">
-                and introduce = #{introduce}
-            </if>
-            <if test="avatar != null and avatar != ''">
-                and avatar = #{avatar}
-            </if>
-            <if test="status != null">
-                and status = #{status}
-            </if>
-            <if test="email != null and email != ''">
-                and email = #{email}
-            </if>
-            <if test="phone != null and phone != ''">
-                and phone = #{phone}
-            </if>
-            <if test="isDelete != null">
-                and is_delete = #{isDelete}
-            </if>
-            <if test="extJson != null and extJson != ''">
-                and ext_json = #{extJson}
-            </if>
-            <if test="createdBy != null and createdBy != ''">
-                and CREATED_BY = #{createdBy}
-            </if>
-            <if test="createdTime != null">
-                and CREATED_TIME = #{createdTime}
-            </if>
-            <if test="updatedBy != null and updatedBy != ''">
-                and UPDATED_BY = #{updatedBy}
-            </if>
-            <if test="updatedTime != null">
-                and UPDATED_TIME = #{updatedTime}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
-    </select>
+
 
     <!--统计总行数-->
     <select id="count" resultType="java.lang.Long">
@@ -141,6 +85,9 @@
                 and UPDATED_TIME = #{updatedTime}
             </if>
         </where>
+    </select>
+    <select id="queryByUsername" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from auth_user where username = #{username}
     </select>
 
     <!--新增所有列-->

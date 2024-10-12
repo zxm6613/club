@@ -42,4 +42,11 @@ public interface AuthPermissionService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 按名称查询
+     *
+     * @param name 名字
+     * @return {@link AuthPermission }
+     */
+    AuthPermission queryByName(String name);
 }

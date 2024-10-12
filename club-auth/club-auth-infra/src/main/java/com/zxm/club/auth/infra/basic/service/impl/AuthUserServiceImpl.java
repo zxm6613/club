@@ -1,5 +1,7 @@
 package com.zxm.club.auth.infra.basic.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.zxm.club.auth.infra.basic.entity.AuthUser;
 import com.zxm.club.auth.infra.basic.mapper.AuthUserDao;
 import com.zxm.club.auth.infra.basic.service.AuthUserService;
@@ -36,9 +38,13 @@ public class AuthUserServiceImpl implements AuthUserService {
      * @return 实例对象
      */
     @Override
-    public AuthUser insert(AuthUser authUser) {
-        this.authUserDao.insert(authUser);
-        return authUser;
+    public boolean insert(AuthUser authUser) {
+        if (authUser.getStatus() == null) authUser.setStatus(0);
+        if (StrUtil.isBlank(authUser.getNickname()))
+            authUser.setNickname(RandomUtil.randomString(10));
+        authUser.setIsDelete(0);
+
+        return this.authUserDao.insert(authUser) > 0;
     }
 
     /**
@@ -48,9 +54,8 @@ public class AuthUserServiceImpl implements AuthUserService {
      * @return 实例对象
      */
     @Override
-    public AuthUser update(AuthUser authUser) {
-        this.authUserDao.update(authUser);
-        return this.queryById(authUser.getId());
+    public int update(AuthUser authUser) {
+        return this.authUserDao.update(authUser);
     }
 
     /**
@@ -62,5 +67,15 @@ public class AuthUserServiceImpl implements AuthUserService {
     @Override
     public boolean deleteById(Long id) {
         return this.authUserDao.deleteById(id) > 0;
+    }
+
+    /**
+     * 按用户名查询
+     *
+     * @param username 用户名
+     */
+    @Override
+    public int queryByUsername(String username) {
+        return this.authUserDao.queryByUsername(username);
     }
 }

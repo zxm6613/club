@@ -25,12 +25,12 @@
         </dependency>
         <dependency>
             <groupId>com.zxm</groupId>
-            <artifactId>club-subject-infra</artifactId>
+            <artifactId>club-auth-infra</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.zxm</groupId>
-            <artifactId>club-subject-domain</artifactId>
+            <artifactId>club-auth-domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->

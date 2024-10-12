@@ -100,6 +100,12 @@
             </if>
         </where>
     </select>
+    <select id="queryByName" resultMap="AuthRoleMap">
+        select
+            id, role_name, status, role_key, data_range, is_delete, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+        from auth_role
+        where role_name = #{roleName}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
@@ -166,6 +172,9 @@
             </if>
         </set>
         where id = #{id}
+    </update>
+    <update id="logicDelete">
+        update auth_role set is_delete = 1 where id = #{id}
     </update>
 
     <!--通过主键删除-->

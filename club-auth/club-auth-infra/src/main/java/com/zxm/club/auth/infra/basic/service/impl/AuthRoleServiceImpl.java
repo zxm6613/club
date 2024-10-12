@@ -64,4 +64,14 @@ public class AuthRoleServiceImpl implements AuthRoleService {
     public boolean deleteById(Long id) {
         return this.authRoleDao.deleteById(id) > 0;
     }
+
+    @Override
+    public AuthRole queryByName(String roleName) {
+        return this.authRoleDao.queryByName(roleName);
+    }
+
+    @Override
+    public void logicDelete(Long id) {
+        this.authRoleDao.logicDelete(id);
+    }
 }

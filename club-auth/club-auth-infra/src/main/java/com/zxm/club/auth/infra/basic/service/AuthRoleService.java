@@ -42,4 +42,18 @@ public interface AuthRoleService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 按名称查询
+     *
+     * @param roleName 角色名称
+     * @return {@link AuthRole }
+     */
+    AuthRole queryByName(String roleName);
+
+    /**
+     * 逻辑删除
+     *
+     * @param id 身份证
+     */
+    void logicDelete(Long id);
 }

@@ -70,5 +70,12 @@ public interface AuthUserDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 按用户名查询
+     *
+     * @param username 用户名
+     * @return int
+     */
+    int queryByUsername(String username);
 }
 

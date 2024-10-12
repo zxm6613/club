@@ -121,6 +121,12 @@
             </if>
         </where>
     </select>
+    <select id="queryByName" resultMap="AuthPermissionMap">
+        select
+            id, name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+        from auth_permission
+        where name = #{name}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

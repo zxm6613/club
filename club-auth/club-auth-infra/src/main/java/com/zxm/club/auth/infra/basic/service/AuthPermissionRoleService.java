@@ -2,6 +2,8 @@ package com.zxm.club.auth.infra.basic.service;
 
 import com.zxm.club.auth.infra.basic.entity.AuthPermissionRole;
 
+import java.util.List;
+
 /**
  * 权限角色关系表(AuthPermissionRole)表服务接口
  *
@@ -43,4 +45,10 @@ public interface AuthPermissionRoleService {
      */
     boolean deleteById(Long id);
 
+    /**
+     * 插入批处理
+     *
+     * @param authPermissionRoleList auth 权限角色列表
+     */
+    void insertBatch(List<AuthPermissionRole> authPermissionRoleList);
 }

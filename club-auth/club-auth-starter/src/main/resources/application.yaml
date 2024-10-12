@@ -53,6 +53,7 @@ spring:
         min-idle: 0
 publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJs6c/K9JqYEnZhhsUVwrKRzQFSI80VdfzVJqp0rOVXect6RNJobFmj90UffXjrCbPgg00GzFffunDNEme2p1xcCAwEAAQ==
 
+
 #日志配置
 logging:
   config: classpath:log4j2-spring.xml

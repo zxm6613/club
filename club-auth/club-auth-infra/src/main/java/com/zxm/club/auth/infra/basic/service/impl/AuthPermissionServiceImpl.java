@@ -64,4 +64,15 @@ public class AuthPermissionServiceImpl implements AuthPermissionService {
     public boolean deleteById(Long id) {
         return this.authPermissionDao.deleteById(id) > 0;
     }
+
+    /**
+     * 按名称查询
+     *
+     * @param name 名字
+     * @return {@link AuthPermission }
+     */
+    @Override
+    public AuthPermission queryByName(String name) {
+        return this.authPermissionDao.queryByName(name);
+    }
 }

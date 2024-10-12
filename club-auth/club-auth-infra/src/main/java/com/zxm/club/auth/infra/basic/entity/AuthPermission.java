@@ -66,6 +66,10 @@ public class AuthPermission implements Serializable {
      * 更新时间
      */
     private Date updatedTime;
+    /**
+     * 是否删除
+     */
+    private Integer isDelete;
 
 }
 
