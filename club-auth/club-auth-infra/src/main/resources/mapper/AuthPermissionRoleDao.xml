@@ -79,6 +79,12 @@
             </if>
         </where>
     </select>
+    <select id="queryByRoleId" resultMap="AuthPermissionRoleMap">
+        select
+            id, role_id, permission_id, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+        from auth_permission_role
+        where role_id = #{id}
+    </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">

@@ -21,7 +21,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="AuthPermissionMap">
         select
-          id, name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+          id, name, parent_id, type, menu_url, status, `show`, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
         from auth_permission
         where id = #{id}
     </select>
@@ -99,7 +99,7 @@
                 and status = #{status}
             </if>
             <if test="show != null">
-                and show = #{show}
+                and `show` = #{show}
             </if>
             <if test="icon != null and icon != ''">
                 and icon = #{icon}
@@ -123,19 +123,19 @@
     </select>
     <select id="queryByName" resultMap="AuthPermissionMap">
         select
-            id, name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
+            id, name, parent_id, type, menu_url, status, `show`, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME
         from auth_permission
         where name = #{name}
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into auth_permission(name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        insert into auth_permission(name, parent_id, type, menu_url, status, `show`, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
         values (#{name}, #{parentId}, #{type}, #{menuUrl}, #{status}, #{show}, #{icon}, #{permissionKey}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into auth_permission(name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        insert into auth_permission(name, parent_id, type, menu_url, status, `show`, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
         values
         <foreach collection="entities" item="entity" separator=",">
         (#{entity.name}, #{entity.parentId}, #{entity.type}, #{entity.menuUrl}, #{entity.status}, #{entity.show}, #{entity.icon}, #{entity.permissionKey}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime})
@@ -143,7 +143,7 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into auth_permission(name, parent_id, type, menu_url, status, show, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
+        insert into auth_permission(name, parent_id, type, menu_url, status, `show`, icon, permission_key, CREATED_BY, CREATED_TIME, UPDATED_BY, UPDATED_TIME)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.name}, #{entity.parentId}, #{entity.type}, #{entity.menuUrl}, #{entity.status}, #{entity.show}, #{entity.icon}, #{entity.permissionKey}, #{entity.createdBy}, #{entity.createdTime}, #{entity.updatedBy}, #{entity.updatedTime})
@@ -154,7 +154,7 @@
         type = values(type),
         menu_url = values(menu_url),
         status = values(status),
-        show = values(show),
+        `show` = values(show),
         icon = values(icon),
         permission_key = values(permission_key),
         CREATED_BY = values(CREATED_BY),
@@ -183,7 +183,7 @@
                 status = #{status},
             </if>
             <if test="show != null">
-                show = #{show},
+                `show` = #{show},
             </if>
             <if test="icon != null and icon != ''">
                 icon = #{icon},

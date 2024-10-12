@@ -76,4 +76,15 @@ public class AuthPermissionRoleServiceImpl implements AuthPermissionRoleService 
     public void insertBatch(List<AuthPermissionRole> authPermissionRoleList) {
         this.authPermissionRoleDao.insertBatch(authPermissionRoleList);
     }
+
+    /**
+     * 按角色 ID 查询
+     *
+     * @param id 身份证
+     * @return {@link List }<{@link AuthPermissionRole }>
+     */
+    @Override
+    public List<AuthPermissionRole> queryByRoleId(Long id) {
+        return this.authPermissionRoleDao.queryByRoleId(id);
+    }
 }

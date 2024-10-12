@@ -4,7 +4,6 @@ import cn.dev33.satoken.stp.StpInterface;
 import com.alibaba.nacos.api.utils.StringUtils;
 import com.google.gson.Gson;
 import com.zxm.club.gateway.redis.RedisUtil;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -33,6 +32,8 @@ public class StpInterfaceImpl implements StpInterface {
         return getList(loginId.toString(), rolePrefix);
     }
 
+
+    //loginId就是账号，或者唯一标识
     private List<String> getList(String loginId, String prefix) {
         String authKey = redisUtil.buildKey(prefix, loginId.toString());
         String authValue = redisUtil.get(authKey);
