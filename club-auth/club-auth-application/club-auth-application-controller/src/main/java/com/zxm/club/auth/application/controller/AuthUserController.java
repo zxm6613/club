@@ -1,5 +1,6 @@
 package com.zxm.club.auth.application.controller;
 
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
@@ -174,14 +175,24 @@ public class AuthUserController {
     }
 
     // 测试登录，浏览器访问： http://localhost:4003/user/doLogin?username=zhang&password=123456
-    @RequestMapping("/doLogin")
-    public String doLogin(String username, String password) {
-        // 此处仅作模拟示例，真实项目需要从数据库中查询数据进行比对 
-        if ("zhang".equals(username) && "123456".equals(password)) {
-            StpUtil.login(10001);
-            return "登录成功";
+    @GetMapping("/doLogin")
+    public Result<SaTokenInfo> doLogin(@RequestParam("code") String code) {
+        try {
+            //如果当前日志级别高于 Info（如设置为 Warn、Error），log.info 不会被执行。
+            if (log.isInfoEnabled()) {
+                log.info("UserController.doLogin.code:{}",
+                        JSON.toJSONString(code));
+            }
+
+            Preconditions.checkNotNull(code,"验证码不能为空");
+
+            this.authUserDomainService.doLogin(code);
+            SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+            return Result.ok(tokenInfo);
+        } catch (Exception e) {
+            log.error("异常信息{}", e.getMessage());
+            return Result.fail(e.getMessage());
         }
-        return "登录失败";
     }
 
     // 查询登录状态，浏览器访问： http://localhost:8081/user/isLogin

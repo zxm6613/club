@@ -15,6 +15,7 @@
         <module name="club-auth-domain" />
         <module name="club-auth-application-controller" />
         <module name="club-subject-domain" />
+        <module name="club-wx" />
         <module name="club-auth-application-job" />
         <module name="club-gateway" />
         <module name="club-oss" />

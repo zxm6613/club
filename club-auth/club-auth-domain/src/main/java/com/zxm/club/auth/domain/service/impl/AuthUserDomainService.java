@@ -45,4 +45,11 @@ public interface AuthUserDomainService {
      * @return {@link AuthUserBO }
      */
     AuthUserBO queryById(Long id);
+
+    /**
+     * do login
+     *
+     * @param code 法典
+     */
+    void doLogin(String code);
 }

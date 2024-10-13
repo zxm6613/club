@@ -1,6 +1,7 @@
 package com.zxm.club.auth.domain.service.impl.impl;
 
 import cn.dev33.satoken.secure.SaSecureUtil;
+import cn.dev33.satoken.stp.StpUtil;
 import com.google.gson.Gson;
 import com.zxm.club.auth.domain.convert.AuthUserConverter;
 import com.zxm.club.auth.domain.entity.AuthUserBO;
@@ -50,6 +51,8 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
     @Resource
     private RedisUtil redisUtil;
 
+    private final String captchaPrefix = "code";
+
     private final String authPrefix = "auth";
     private final String rolePrefix = "role";
 
@@ -76,9 +79,11 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
 //        System.out.println("publicKey = " + publicKey);
 //        String privateKey = reaMap.get("private");
 //        System.out.println("privateKey = " + privateKey);
-        //密码加密，使用rsa非对称加密
-        authUser.setPassword(SaSecureUtil.rsaEncryptByPublic(publicKey, authUserBO.getPassword()));
-        System.out.println("密码解密后为：" + SaSecureUtil.rsaDecryptByPrivate(privateKey, authUser.getPassword()));
+        if (authUser.getPassword() != null){
+            //密码加密，使用rsa非对称加密
+            authUser.setPassword(SaSecureUtil.rsaEncryptByPublic(publicKey, authUserBO.getPassword()));
+            System.out.println("密码解密后为：" + SaSecureUtil.rsaDecryptByPrivate(privateKey, authUser.getPassword()));
+        }
         boolean success = authUserService.insert(authUser);
         if (!success) throw new RuntimeException("注册失败");
         //TODO:分配用户的角色，默认给每一个用户分配一个初级角色basic,这里使用缓存来把本次用户的角色和角色有的权限放进缓存
@@ -173,5 +178,27 @@ public class AuthUserDomainServiceImpl implements AuthUserDomainService {
         authUser.setPassword(SaSecureUtil.rsaDecryptByPrivate(privateKey, authUser.getPassword()));
 
         return AuthUserConverter.INSTANCE.convertToAuthUserBO(authUser);
+    }
+
+    /**
+     * do login
+     *
+     * @param code 法典
+     */
+    @Override
+    @Transactional
+    public void doLogin(String code) {
+        String codeKey = redisUtil.buildKey(captchaPrefix, code);
+        String openId = redisUtil.get(codeKey);
+        if (openId == null) throw new RuntimeException("验证码错误");
+
+        AuthUserBO authUserBO = new AuthUserBO();
+        authUserBO.setUsername(openId);
+        try {
+            this.insert(authUserBO);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        StpUtil.login(openId);
     }
 }
